@@ -40,4 +40,6 @@ void EventQueue::run() {
     event.resolve();
     m_event_queue.pop_front();
   } 
+
+  printf("Finish simulation at cycle %ld\n", m_time);
 }

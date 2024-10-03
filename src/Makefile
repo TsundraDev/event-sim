@@ -71,11 +71,12 @@ all : build
 ## -------------------------------------------------------------------------------------------------
 ## -- Link object files into executable
 ## -------------------------------------------------------------------------------------------------
-build : $(OBJ)
+$(EXEC) : $(OBJ)
 	@# Link object files
 	@printf "%b[ LINK] %b" $(YELLOW) $(RESET_COLOR)
 	$(LD) $(LD_FLAGS) $(OBJ) -o $(EXEC)
 
+build : $(OBJ) $(EXEC)
 	@printf "%b[BUILD] Executable built\n%b" $(GREEN) $(RESET_COLOR)
 
 

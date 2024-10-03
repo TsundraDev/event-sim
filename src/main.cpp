@@ -4,8 +4,6 @@
 
 int main() {
 
-  printf("event-sim\n");
-
   EventQueue event_queue = EventQueue();
 
   Agent ag1 = Agent(&event_queue);
@@ -19,7 +17,6 @@ int main() {
 
   printf("Start simulation\n");
   event_queue.run();
-  printf("Finish simulation\n");
 
   return 0;
 }
