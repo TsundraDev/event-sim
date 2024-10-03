@@ -11,7 +11,11 @@ int main() {
   Agent ag1 = Agent(&event_queue);
   Agent ag2 = Agent(&event_queue);
 
-  ag1.createEvent(10);
+  ag1.createEvent(Event(10));
+  ag1.createEvent(Event(1));
+  ag1.createEvent(Event(10));
+  ag1.createEvent(Event(20));
+  ag1.createEvent(Event(10));
 
   printf("Start simulation\n");
   event_queue.run();

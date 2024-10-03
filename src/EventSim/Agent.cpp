@@ -12,9 +12,7 @@ Agent::~Agent() {
 
 }
 
-void Agent::createEvent(uint64_t time) {
-  Event event = Event(time);
-  event.addEntry(nullptr, nullptr, 0);
+void Agent::createEvent(Event event) {
   m_event_queue->addEvent(event);
 }
 

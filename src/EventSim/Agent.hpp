@@ -3,6 +3,7 @@
 
 #include <cstdint>
 
+class Event;
 class EventQueue;
 
 class Agent {
@@ -13,7 +14,7 @@ public:
   Agent(EventQueue* event_queue);
   ~Agent();
 
-  void createEvent(uint64_t time);
+  void createEvent(Event event);
   void recvEvent(uint8_t* data, uint64_t size);
 };
 
