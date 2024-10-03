@@ -23,9 +23,10 @@ LD_FLAGS =
 ## -- Generated files
 ## -------------------------------------------------------------------------------------------------
 SRC  = main.cpp
-SRC += LogBook.cpp
-SRC += Logger.cpp
-SRC += LogSystem.cpp
+
+SRC += Agent.cpp
+SRC += Event.cpp
+SRC += EventQueue.cpp
 
 DEP  = $(patsubst %.cpp,../build/dep/%.dep,$(SRC))
 OBJ  = $(patsubst %.cpp,../build/obj/%.o,$(SRC))
@@ -47,9 +48,9 @@ all : build
 	@printf "%b[  DEP] %b" $(YELLOW) $(RESET_COLOR)
 	$(CC) -MM -MT ../build/obj/$(patsubst %.cpp,%.o,$<) $^ -o $@
 
-../build/dep/%.dep : Log/%.cpp
+../build/dep/%.dep : EventSim/%.cpp
 	@printf "%b[  DEP] %b" $(YELLOW) $(RESET_COLOR)
-	$(CC) -MM -MT ../build/obj/$(patsubst Log/%.cpp,%.o,$<) $^ -o $@
+	$(CC) -MM -MT ../build/obj/$(patsubst EventSim/%.cpp,%.o,$<) $^ -o $@
 
 # Automatically include dependencies
 -include $(DEP)
@@ -62,7 +63,7 @@ all : build
 	@printf "%b[CMPIL] %b" $(YELLOW) $(RESET_COLOR)
 	$(CC) $(CC_FLAGS) $(CC_INC) -c $< -o $@
 
-../build/obj/%.o : Log/%.cpp
+../build/obj/%.o : EventSim/%.cpp
 	@printf "%b[CMPIL] %b" $(YELLOW) $(RESET_COLOR)
 	$(CC) $(CC_FLAGS) $(CC_INC) -c $< -o $@
 
