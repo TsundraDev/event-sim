@@ -15,7 +15,6 @@ int main() {
   ag1.createEvent(Event(20));
   ag1.createEvent(Event(10));
 
-  printf("Start simulation\n");
   event_queue.run();
 
   return 0;

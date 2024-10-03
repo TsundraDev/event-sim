@@ -29,6 +29,7 @@ void EventQueue::addEvent(Event event) {
 }
 
 void EventQueue::run() {
+  printf("Start simulation\n");
   while (!m_event_queue.empty()) {
     Event event = m_event_queue.front();
 
