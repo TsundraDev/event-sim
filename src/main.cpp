@@ -9,11 +9,8 @@ int main() {
   Agent ag1 = Agent(&event_queue);
   Agent ag2 = Agent(&event_queue);
 
-  ag1.createEvent(Event(10));
-  ag1.createEvent(Event(1));
-  ag1.createEvent(Event(10));
-  ag1.createEvent(Event(20));
-  ag1.createEvent(Event(10));
+  ag1.createEvent(Event(0));
+  ag1.createEvent(Event(0, &ag2, nullptr, 0));
 
   event_queue.run();
 

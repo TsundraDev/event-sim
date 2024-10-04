@@ -8,16 +8,18 @@
 
 class EventQueue {
 private:
-  uint64_t m_time;
-  std::list<Event> m_event_queue;
+  uint64_t            m_time;
+  std::list<Event>    m_event_queue;
+  std::vector<Agent*> m_update_agent_list;
 
 public:
   EventQueue();
   ~EventQueue();
 
   void addEvent(Event event);
-
   void run();
+
+  void updateAgents();
 };
 
 

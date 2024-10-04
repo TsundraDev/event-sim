@@ -5,7 +5,8 @@
 
 EventQueue::EventQueue() :
   m_time(0),
-  m_event_queue(std::list<Event>()){}
+  m_event_queue(std::list<Event>()),
+  m_update_agent_list(std::vector<Agent*>()) {}
 
 EventQueue::~EventQueue() {
 
@@ -30,17 +31,53 @@ void EventQueue::addEvent(Event event) {
 
 void EventQueue::run() {
   printf("Start simulation\n");
-  while (!m_event_queue.empty()) {
-    Event event = m_event_queue.front();
+  while (!m_event_queue.empty() || !m_update_agent_list.empty()) {
+    // If EventQueue is empty, update agents and retry
+    if (m_event_queue.empty()) {
+      this->updateAgents();
+      continue;
+    }
 
-    // Update time
-    assert(m_time <= event.time());
-    m_time = event.time();
+    // Get current time
+    Event event = m_event_queue.front();
+    uint64_t event_time = event.time();
+
+    // If time has moved, update all relevant agents
+    assert(m_time <= event_time);
+    if (m_time < event_time) {
+      this->updateAgents();
+      m_time = event.time();
+    }
+
+    // Get agents to update
+    std::vector<EventEntry> event_data = event.eventData();
+    for (uint64_t i = 0; i < event_data.size(); i++) {
+      // Find duplicate
+      bool find_duplicate = false;
+      for (uint64_t j = 0; j < m_update_agent_list.size(); j++) {
+        //printf("j : %ld; size : %ld\n", j, m_update_agent_list.size());
+        if (event_data[i].agent == m_update_agent_list[j]) {
+          find_duplicate = true;
+          continue;
+        }
+      }
+
+      // Update update agent list
+      if (!find_duplicate) m_update_agent_list.push_back(event_data[i].agent);
+    }
 
     // Resolve event
     event.resolve();
     m_event_queue.pop_front();
-  } 
+  }
 
+  // Check no more updates necessary
   printf("Finish simulation at cycle %ld\n", m_time);
+}
+
+void EventQueue::updateAgents() {
+  for (uint64_t i = 0; i < m_update_agent_list.size(); i++) {
+    m_update_agent_list[i]->update();
+  }
+  m_update_agent_list.clear();
 }

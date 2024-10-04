@@ -4,6 +4,14 @@ Event::Event(uint64_t time) :
   m_time(time),
   m_event_data(std::vector<EventEntry>()) {}
 
+Event::Event(uint64_t time, Agent* agent, uint8_t* data, uint64_t size) :
+  m_time(time),
+  m_event_data(std::vector<EventEntry>()) {
+  EventEntry entry = {agent, data, size};
+  m_event_data.push_back(entry);
+}
+
+
 void Event::addEntry(Agent* agent, uint8_t* data, uint64_t size) {
   EventEntry entry = {agent, data, size};
   m_event_data.push_back(entry);
