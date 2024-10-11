@@ -24,7 +24,7 @@ public:
     uint64_t recv_pc = *(uint64_t*)data;
     m_pc = recv_pc;
 
-    uint64_t send_time = m_event_queue->time() + 1;
+    uint64_t send_time = m_event_queue->time();
     uint64_t* send_data = new uint64_t;
     *send_data = recv_pc;
     this->createEvent(Event(send_time, (Agent*)m_upc, (uint8_t*)send_data, 8));
