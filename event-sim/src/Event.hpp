@@ -15,14 +15,14 @@ struct EventEntry {
 
 class Event {
 private:
-  uint64_t                m_time;
+  uint64_t                m_tick;
   std::vector<EventEntry> m_event_data;
 
 public:
-  Event(uint64_t time);
-  Event(uint64_t time, Agent* agent, uint8_t* data, uint64_t size);
+  Event(uint64_t tick);
+  Event(uint64_t tick, Agent* agent, uint8_t* data, uint64_t size);
 
-  uint64_t                time()      { return m_time; };
+  uint64_t                tick()      { return m_tick; };
   std::vector<EventEntry> eventData() { return m_event_data;}
 
   void addEntry(Agent* agent, uint8_t* data, uint64_t size);

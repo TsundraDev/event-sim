@@ -4,8 +4,8 @@
 #include <cstdio>
 
 EventQueue::EventQueue() :
-  m_time(0),
-  m_max_time(100),
+  m_tick(0),
+  m_max_tick(0x1000),
   m_event_queue(std::list<Event>()) {}
 
 EventQueue::~EventQueue() {
@@ -15,7 +15,8 @@ EventQueue::~EventQueue() {
 void EventQueue::addEvent(Event event) {
   std::list<Event>::iterator it;
   for (it = m_event_queue.begin(); it != m_event_queue.end(); it++) {
-    if (it->time() > event.time()) {
+    // Append event to last event with same tick
+    if (it->tick() > event.tick()) {
       m_event_queue.insert(it, event);
       return;
     }
@@ -27,17 +28,16 @@ void EventQueue::run() {
   printf("Start simulation\n");
   while (!m_event_queue.empty()) {
     // Finish simulation early
-    if (m_time >= m_max_time) {
-      printf("Finish simulation early [max_cycles: %ld]\n", m_max_time);
+    if (m_tick >= m_max_tick) {
+      printf("Finish simulation early [max_tick: %ld]\n", m_max_tick);
       break;
     }
-    // Get current time
-    Event event = m_event_queue.front();
 
     // Update time
-    assert(m_time <= event.time());
-    if (m_time < event.time()) {
-      m_time = event.time();
+    Event event = m_event_queue.front();
+    assert(m_tick <= event.tick());
+    if (m_tick < event.tick()) {
+      m_tick = event.tick();
     }
 
     // Resolve event
@@ -46,5 +46,5 @@ void EventQueue::run() {
   }
 
   // Check no more updates necessary
-  printf("Finish simulation at cycle %ld\n", m_time);
+  printf("Finish simulation at tick %ld\n", m_tick);
 }

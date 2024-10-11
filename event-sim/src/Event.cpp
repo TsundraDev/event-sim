@@ -1,12 +1,12 @@
 #include "Event.hpp"
 #include <cstdio>
 
-Event::Event(uint64_t time) :
-  m_time(time),
+Event::Event(uint64_t tick) :
+  m_tick(tick),
   m_event_data(std::vector<EventEntry>()) {}
 
-Event::Event(uint64_t time, Agent* agent, uint8_t* data, uint64_t size) :
-  m_time(time),
+Event::Event(uint64_t tick, Agent* agent, uint8_t* data, uint64_t size) :
+  m_tick(tick),
   m_event_data(std::vector<EventEntry>()) {
   EventEntry entry = {agent, data, size};
   m_event_data.push_back(entry);

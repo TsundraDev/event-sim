@@ -8,8 +8,8 @@
 
 class EventQueue {
 private:
-  uint64_t            m_time;
-  uint64_t            m_max_time;
+  uint64_t            m_tick;
+  uint64_t            m_max_tick;
   std::list<Event>    m_event_queue;
 
 
@@ -17,7 +17,7 @@ public:
   EventQueue();
   ~EventQueue();
 
-  uint64_t time() { return m_time; }
+  uint64_t tick() { return m_tick; }
 
   void addEvent(Event event);
   void run();
