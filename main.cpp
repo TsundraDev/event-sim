@@ -1,6 +1,6 @@
 #include <cstdio>
 
-#include <EventSim/EventSim.hpp>
+#include <EventSim.hpp>
 
 int main() {
 
