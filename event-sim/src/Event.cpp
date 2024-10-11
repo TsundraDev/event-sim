@@ -1,4 +1,5 @@
 #include "Event.hpp"
+#include <cstdio>
 
 Event::Event(uint64_t time) :
   m_time(time),

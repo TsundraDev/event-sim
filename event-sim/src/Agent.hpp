@@ -9,18 +9,15 @@ class Event;
 class EventQueue;
 
 class Agent {
-private:
+protected:
   EventQueue* m_event_queue;
-  std::vector<EventEntry> m_inbox;
 
 public:
   Agent(EventQueue* event_queue);
   ~Agent();
 
   void createEvent(Event event);
-  void recvEvent(uint8_t* data, uint64_t size);
-
-  void update();
+  virtual void recvEvent(uint8_t* data, uint64_t size);
 };
 
 #endif

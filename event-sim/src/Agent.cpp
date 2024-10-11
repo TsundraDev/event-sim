@@ -3,18 +3,17 @@
 #include <cassert>
 #include <cstdint>
 #include <cstdio>
+#include <cstdlib>
 #include <vector>
 
 #include "Event.hpp"
 #include "EventQueue.hpp"
 
 Agent::Agent(EventQueue* event_queue) :
-  m_event_queue(event_queue),
-  m_inbox(std::vector<EventEntry>()) {}
+  m_event_queue(event_queue) {}
 
 Agent::~Agent() {
-  // Check Agent has no more messages
-  assert(m_inbox.empty());
+
 }
 
 void Agent::createEvent(Event event) {
@@ -22,11 +21,7 @@ void Agent::createEvent(Event event) {
 }
 
 void Agent::recvEvent(uint8_t* data, uint64_t size) {
-  EventEntry event = { nullptr, data, size };
-  m_inbox.push_back(event);
+  fprintf(stderr, "Unimplemented Agent::recvEvent\n");
+  exit(1);
 }
 
-void Agent::update() {
-  // Currently ignore all messages
-  m_inbox.clear();
-}

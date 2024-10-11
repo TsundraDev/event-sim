@@ -9,17 +9,18 @@
 class EventQueue {
 private:
   uint64_t            m_time;
+  uint64_t            m_max_time;
   std::list<Event>    m_event_queue;
-  std::vector<Agent*> m_update_agent_list;
+
 
 public:
   EventQueue();
   ~EventQueue();
 
+  uint64_t time() { return m_time; }
+
   void addEvent(Event event);
   void run();
-
-  void updateAgents();
 };
 
 
