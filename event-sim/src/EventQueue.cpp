@@ -26,8 +26,9 @@ void EventQueue::addEvent(Event event) {
 void EventQueue::run() {
   printf("Start simulation\n");
   while (!m_event_queue.empty()) {
-    if (m_time > m_max_time) {
-      printf("Early release\n");
+    // Finish simulation early
+    if (m_time >= m_max_time) {
+      printf("Finish simulation early [max_cycles: %ld]\n", m_max_time);
       break;
     }
     // Get current time
