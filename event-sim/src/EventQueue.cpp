@@ -28,7 +28,7 @@ void EventQueue::run() {
   printf("Start simulation\n");
   while (!m_event_queue.empty()) {
     // Finish simulation early
-    if (m_tick >= m_max_tick) {
+    if (!(m_tick < m_max_tick)) {
       printf("Finish simulation early [max_tick: %ld]\n", m_max_tick);
       break;
     }
