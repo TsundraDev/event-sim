@@ -17,7 +17,7 @@ public:
   ~Agent();
 
   void createEvent(Event event);
-  virtual void recvEvent(uint8_t* data, uint64_t size);
+  virtual void recvEvent(Agent* src, uint8_t* data, uint64_t size);
 };
 
 #endif

@@ -20,7 +20,7 @@ void Agent::createEvent(Event event) {
   m_event_queue->addEvent(event);
 }
 
-void Agent::recvEvent(uint8_t* data, uint64_t size) {
+void Agent::recvEvent(Agent* src, uint8_t* data, uint64_t size) {
   fprintf(stderr, "Unimplemented Agent::recvEvent\n");
   exit(1);
 }
