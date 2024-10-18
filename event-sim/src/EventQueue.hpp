@@ -21,6 +21,7 @@ public:
 
   void addEvent(Event event);
   void run();
+  void runTick(uint64_t tick);
 };
 
 

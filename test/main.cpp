@@ -20,7 +20,7 @@ int main() {
   Clock clock = Clock(&event_queue);
   clock.init();
 
-  event_queue.run();
+  event_queue.runTick(0);
 
   return 0;
 }

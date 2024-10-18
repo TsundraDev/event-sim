@@ -48,3 +48,27 @@ void EventQueue::run() {
   // Check no more updates necessary
   printf("Finish simulation at tick %ld\n", m_tick);
 }
+
+void EventQueue::runTick(uint64_t tick) {
+  while (!m_event_queue.empty()) {
+    // Finish simulation early
+    if (!(m_tick < m_max_tick)) {
+      printf("Finish simulation early [max_tick: %ld]\n", m_max_tick);
+      break;
+    }
+
+    // Check if we've overstepped
+    Event event = m_event_queue.front();
+    assert(m_tick <= event.tick());
+    if (event.tick() >= tick) return;
+
+    // Update time
+    if (m_tick < event.tick()) {
+      m_tick = event.tick();
+    }
+
+    // Resolve event
+    event.resolve();
+    m_event_queue.pop_front();
+  }
+}
