@@ -1,6 +1,6 @@
 #include <cstdio>
 
-#include <EventSim.hpp>
+#include <event-sim.hpp>
 
 class Clock : public Agent {
 public:
